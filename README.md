@@ -2,6 +2,7 @@
 
 ## Prerequisite
 - nasm 2.15.05
+- GDB 10.1.90.20210103
 - GNU make 4.3
 
 ## TODO
