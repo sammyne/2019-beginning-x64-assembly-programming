@@ -21,7 +21,7 @@ $(apps): %: %.asm
 	@echo "build then run $@"
 	nasm -f elf64 -g -F dwarf $^ -l $@.lst
 	gcc -o $@.out $@.o -no-pie
-	./$@.out
+	- ./$@.out
 
 .PHONY: clean
 clean:
