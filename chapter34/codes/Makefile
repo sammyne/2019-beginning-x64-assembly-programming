@@ -1,14 +1,22 @@
 
-app = string4
+srcs = $(shell find $(SRCDIR) -name "*.asm")
+
+apps = $(srcs:./%.asm=%)
+
+objects = $(apps:%=%.o)
+
+binaries = $(apps:%=%.out)
 
 .PHONY: all
-all: $(app)
+all: $(apps)
 
-$(app): $(app).o print16b.o
-	gcc -g -o $@.out $^ -no-pie
-	- ./$@.out
+$(apps): %: %.out
+	- ./$<
 
-string4.o: string4.asm
+$(binaries): %.out: %.o print16b.o
+	gcc -g -o $@ $^ -no-pie
+
+$(objects): %.o: %.asm
 	nasm -f elf64 -g -F dwarf $^ -l $@.lst
 
 print16b.o: print16b.c
