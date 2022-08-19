@@ -20,7 +20,3 @@
 
 ## TODO
 - rewrite using GAS syntax
-
-## References
-- [GNU Assembler Examples](https://cs.lmu.edu/~ray/notes/gasexamples/)
-- [Using as](http://sourceware.org/binutils/docs/as/index.html)
