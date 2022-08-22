@@ -1,4 +1,4 @@
-# alive2.asm
+# alive2.s
 
 .intel_syntax noprefix
 

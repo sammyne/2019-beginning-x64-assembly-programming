@@ -1,4 +1,4 @@
-# hello4.asm
+# hello4.s
 .intel_syntax noprefix
 
 # extern declaration isn't unrequired
