@@ -1,4 +1,5 @@
 ; jumploop.asm
+; calculate 1+2+...+5
 
 extern printf
 
@@ -13,20 +14,20 @@ section .text
 main:
   push rbp
   mov rbp, rsp
-  mov rbx,0 ; counter
-  mov rax,0 ; sum will be in rax
+  mov rbx, 0 ; counter
+  mov rax, 0 ; sum will be in rax
 
 jloop:
   add rax, rbx
   inc rbx
-  cmp rbx,[number]  ; number already reached?
+  cmp rbx, [number] ; number already reached?
   jle jloop         ; number not reached yet, loop
-  ; number reached, continue here
-  mov rdi,fmt       ; prepare for displaying
+                    ; number reached, continue here
+  mov rdi, fmt      ; prepare for displaying
   mov rsi, [number]
-  mov rdx,rax
-  mov rax,0
+  mov rdx, rax
+  mov rax, 0
   call printf
-  mov rsp,rbp
+  mov rsp, rbp
   pop rbp
   ret
