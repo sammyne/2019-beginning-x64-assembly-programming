@@ -3,9 +3,9 @@
 extern printf
 
 section .data
-  number1 dq 128 ; the numbers to be used to
-  number2 dq 19 ; show the arithmetic
-  neg_num dq -12 ; to show sign extension
+  number1 dq 128                                  ; the numbers to be used to
+  number2 dq 19                                   ; show the arithmetic
+  neg_num dq -12                                  ; to show sign extension
   fmt     db "The numbers are %ld and %ld",10,0
   fmtint  db "%s %ld",10,0
   sumi    db "The sum is",0
@@ -29,7 +29,7 @@ section .text
 
 main:
   push rbp
-  mov rbp,rsp
+  mov rbp, rsp
   ; displaying the numbers
   mov rdi, fmt
   mov rsi, [number1]
@@ -58,7 +58,7 @@ main:
   call printf
   ; incrementing------------------------------------------------------
   mov rax, [number1]
-  inc rax ; increment rax with 1
+  inc rax             ; increment rax with 1
   mov [resulti], rax
   ; displaying the result
   mov rdi, fmtint
