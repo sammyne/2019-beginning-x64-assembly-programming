@@ -56,14 +56,14 @@ This chapter presents an assembler program to put `hello, world` on your screen.
 - Variable names start with a letter, followed by letters or numbers or special characters.
 - Possible datatypes
 
-  Type | Length | Name
+  Type | Length (in bits) | Name
   ---|----------|----
-  `db` | 8  |bits Byte
-  `dw` | 16 | bits Word
-  `dd` | 32 | bits Double word
-  `dq` | 64 | bits Quadword
+  `db` | 8  | Byte
+  `dw` | 16 | Word
+  `dd` | 32 | Double word
+  `dq` | 64 | Quadword
 - A string is a contiguous list of characters.
-  - It is a "list" or "arra" of characters in memory.
+  - It is a "list" or "array" of characters in memory.
   - Any contiguous list in memory can be considered a string
     - the characters can be human readable or not 
     - the string can be meaningful to humans or not
@@ -78,12 +78,12 @@ This chapter presents an assembler program to put `hello, world` on your screen.
   ```
 - Possible `bss` datatypes
 
-  Type | Length | Name
+  Type | Length (in bits) | Name
   -----|--------|---------
-  resb | 8 bits  | Byte
-  resw | 16 bits |  Word
-  resd | 32 bits |  Double word
-  resq | 64 bits |  Quadword
+  resb | 8  | Byte
+  resw | 16 |  Word
+  resd | 32 |  Double word
+  resq | 64 |  Quadword
 
 - The variables in section `.bss` do not contain any values; the values will be assigned later at execution time.
 - Memory places are not reserved at compile time but at execution time.
