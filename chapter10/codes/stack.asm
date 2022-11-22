@@ -15,7 +15,7 @@ section .text
 
 main:
   push rbp
-  mov rbp,rsp
+  mov rbp, rsp
   ; Print the original string
   mov rdi, fmt1
   mov rsi, strng
@@ -43,12 +43,12 @@ popLoop:
   mov byte [rbx+r12], al  ; move the char into strng
   inc r12                 ; increase char pointer with 1
   loop popLoop            ; continue loop
-  mov byte [rbx+r12],0    ; terminate string with 0
+  mov byte [rbx+r12], 0   ; terminate string with 0
   ; Print the reversed string
   mov rdi, fmt2
   mov rsi, strng
   mov rax, 0
   call printf
-  mov rsp,rbp
+  mov rsp, rbp
   pop rbp
   ret
