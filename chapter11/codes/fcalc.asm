@@ -20,7 +20,7 @@ section .text
 
 main:
   push rbp
-  mov rbp,rsp
+  mov rbp, rsp
                           ; print the numbers
   movsd xmm0, [number1]
   movsd xmm1, [number2]
