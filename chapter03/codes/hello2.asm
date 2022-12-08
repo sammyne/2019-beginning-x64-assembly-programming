@@ -1,6 +1,7 @@
-;hello2.asm
+; hello2.asm
+
 section .data
-  msg db "hello, world",0
+  msg db "hello, world", 0
   NL db 0xa ; ascii code for new line
 
 section .bss

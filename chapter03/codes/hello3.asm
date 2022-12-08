@@ -1,11 +1,13 @@
 ; hello3.asm
+
 section .data
-	msg db "hello, world",10,0
+	msg db "hello, world", 10, 0
 
 section .bss
 
 section .text
-global main
+
+	global main
 
 main:
 	mov rax, 1 		; 1 = write
