@@ -2,17 +2,22 @@
 
 extern printf
 
+
 section .data
   radius dq 10.0
 
+
 section .bss
 
+
 section .text
+
 
 ;----------------------------------------------
 area:
   section .data
     .pi dq 3.141592654 ; local to area
+
   section .text
     push rbp
     mov rbp, rsp
@@ -26,6 +31,7 @@ area:
 circum:
   section .data
     .pi dq 3.14 ; local to circum
+
   section .text
     push rbp
     mov rbp, rsp
@@ -38,18 +44,19 @@ circum:
 ;----------------------------------------------
 circle:
   section .data
-    .fmt_area   db "The area is %f",10,0
-    .fmt_circum db "The circumference is %f",10,0
+    .fmt_area   db "The area is %f", 10, 0
+    .fmt_circum db "The circumference is %f", 10, 0
+
   section .text
     push rbp
     mov rbp, rsp
     call area
-    mov rdi,.fmt_area
-    mov rax,1           ; area in xmm0
+    mov rdi, .fmt_area
+    mov rax, 1           ; area in xmm0
     call printf
     call circum
-    mov rdi,.fmt_circum
-    mov rax,1           ; circumference in xmm0
+    mov rdi, .fmt_circum
+    mov rax, 1           ; circumference in xmm0
     call printf
     leave
     ret
