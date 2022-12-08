@@ -3,23 +3,27 @@
 extern printf
 
 section .data
+
   radius  dq 10.0
   pi      dq 3.14
-  fmt     db "The area of the circle is %.2f",10,0
+  fmt     db "The area of the circle is %.2f", 10, 0
+
 
 section .bss
 
+
 section .text
-  global main
+
+
+global main
 
 ;----------------------------------------------
 main:
   push rbp
   mov rbp, rsp
   call area             ; call the function
-  mov rdi,fmt           ; print format
-  movsd xmm1, [radius]  ; move float to xmm1
-  mov rax,1             ; area in xmm0
+  mov rdi, fmt           ; print format
+  mov rax, 1             ; area in xmm0
   call printf
   leave
   ret
