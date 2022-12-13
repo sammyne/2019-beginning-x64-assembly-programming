@@ -13,12 +13,12 @@ section .data
   radius  dq 10.0
   side1   dq 4
   side2   dq 5
-  fmtf    db "%s %f",10,0
-  fmti    db "%s %d",10,0
-  ca      db "The circle area is ",0
-  cc      db "The circle circumference is ",0
-  ra      db "The rectangle area is ",0
-  rc      db "The rectangle circumference is ",0
+  fmtf    db "%s %f", 10, 0
+  fmti    db "%s %d", 10, 0
+  ca      db "The circle area is ", 0
+  cc      db "The circle circumference is ", 0
+  ra      db "The rectangle area is ", 0
+  rc      db "The rectangle circumference is ", 0
 
 section .bss
 
@@ -28,7 +28,7 @@ global main
 
 main:
   push rbp
-  mov rbp,rsp
+  mov rbp, rsp
                               ; circle area
   movsd xmm0, qword [radius]  ; radius xmm0 argument
   call c_area                 ; area returned in xmm0
@@ -65,6 +65,6 @@ main:
   mov rdx, rax
   mov rax, 0
   call printf
-  mov rsp,rbp
+  mov rsp, rbp
   pop rbp
   ret
