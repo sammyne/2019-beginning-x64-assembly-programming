@@ -3,7 +3,7 @@
 extern printf
 
 section .data
-  fmt db "2 times pi equals %.14f",10,0
+  fmt db "2 times pi equals %.14f", 10, 0
   pi  dq 3.14159265358979
 
 section .bss
@@ -15,8 +15,8 @@ func3:
   push rbp
   movsd xmm0, [pi]
   addsd xmm0, [pi]
-  mov rdi,fmt
-  mov rax,1
+  mov rdi, fmt
+  mov rax, 1
   call printf ; print a float
   pop rbp
   ret
