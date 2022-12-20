@@ -13,7 +13,7 @@ section .data
   eighth  db "H"
   ninth   db "I"
   tenth   db "J"
-  fmt     db "The string is: %s",10,0
+  fmt     db "The string is: %s", 10, 0
 
 section .bss
   flist resb 11   ; length of string + terminating 0
@@ -50,38 +50,38 @@ lfunc:
   push rbp
   mov rbp,rsp
   xor rax,rax             ; clear rax (especially higher bits)
-  mov al,byte[rsi]        ; move content 1st argument to al
+  mov al, byte [rsi]      ; move content 1st argument to al
   mov [rdi], al           ; store al to memory
-  mov al, byte[rdx]       ; move content 2nd argument to al
+  mov al, byte [rdx]      ; move content 2nd argument to al
   mov [rdi+1], al         ; store al to memory
-  mov al, byte[rcx]       ; etc for the other arguments
+  mov al, byte [rcx]      ; etc for the other arguments
   mov [rdi+2], al
-  mov al, byte[r8]
+  mov al, byte [r8]
   mov [rdi+3], al
-  mov al, byte[r9]
+  mov al, byte [r9]
   mov [rdi+4], al
                           ; now fetch the arguments from the stack
   push rbx                ; callee saved
   xor rbx,rbx
   mov rax, qword [rbp+16] ; first value: initial stack
                           ; + rip + rbp
-  mov bl, byte[rax]       ; extract the character
+  mov bl, byte [rax]      ; extract the character
   mov [rdi+5], bl         ; store the character to memory
   mov rax, qword [rbp+24] ; continue with next value
-  mov bl, byte[rax]
+  mov bl, byte [rax]
   mov [rdi+6], bl
   mov rax, qword [rbp+32]
-  mov bl, byte[rax]
+  mov bl, byte [rax]
   mov [rdi+7], bl
   mov rax, qword [rbp+40]
-  mov bl, byte[rax]
+  mov bl, byte [rax]
   mov [rdi+8], bl
   mov rax, qword [rbp+48]
-  mov bl, byte[rax]
+  mov bl, byte [rax]
   mov [rdi+9], bl
-  mov bl,0
+  mov bl, 0
   mov [rdi+10], bl
-  pop rbx ; callee saved
+  pop rbx                 ; callee saved
   mov rsp,rbp
   pop rbp
   ret
