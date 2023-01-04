@@ -2,13 +2,13 @@
 extern printf
 
 section .data
-  msgn1   db "Number 1 is = %d",0
-  msgn2   db "Number 2 is = %d",0
-  msg1    db "SHL 2 = OK multiply by 4",0
-  msg2    db "SHR 2 = WRONG divide by 4",0
-  msg3    db "SAL 2 = correctly multiply by 4",0
-  msg4    db "SAR 2 = correctly divide by 4",0
-  msg5    db "SHR 2 = OK divide by 4",0
+  msgn1   db "Number 1 is = %d", 0
+  msgn2   db "Number 2 is = %d", 0
+  msg1    db "SHL 2 = OK multiply by 4", 0
+  msg2    db "SHR 2 = WRONG divide by 4", 0
+  msg3    db "SAL 2 = correctly multiply by 4", 0
+  msg4    db "SAR 2 = correctly divide by 4", 0
+  msg5    db "SHR 2 = OK divide by 4", 0
   number1 dq 8
   number2 dq -8
   result  dq 0
@@ -28,8 +28,8 @@ main:
   call printmsg         ; print heading
   mov rsi, [number1]
   call printnbr         ; print number1
-  mov rax,[number1]
-  shl rax,2             ; multiply by 4 (logic)
+  mov rax, [number1]
+  shl rax, 2            ; multiply by 4 (logic)
   mov rsi, rax
   call printres
                         ; negative number
@@ -37,8 +37,8 @@ main:
   call printmsg         ; print heading
   mov rsi, [number2]
   call printnbr         ; print number2
-  mov rax,[number2]
-  shl rax,2             ; multiply by 4 (logic)
+  mov rax, [number2]
+  shl rax, 2            ; multiply by 4 (logic)
   mov rsi, rax
   call printres
                         ; SAL-------------------------------------------------
@@ -47,8 +47,8 @@ main:
   call printmsg         ; print heading
   mov rsi, [number1]
   call printnbr         ; print number1
-  mov rax,[number1]
-  sal rax,2             ; multiply by 4 (arithmetic)
+  mov rax, [number1]
+  sal rax, 2            ; multiply by 4 (arithmetic)
   mov rsi, rax
   call printres
   ; negative number
@@ -56,8 +56,8 @@ main:
   call printmsg         ; print heading
   mov rsi, [number2]
   call printnbr         ; print number2
-  mov rax,[number2]
-  sal rax,2             ; multiply by 4 (arithmetic)
+  mov rax, [number2]
+  sal rax, 2            ; multiply by 4 (arithmetic)
   mov rsi, rax
   call printres
                         ; SHR-------------------------------------------------
@@ -66,8 +66,8 @@ main:
   call printmsg         ; print heading
   mov rsi, [number1]
   call printnbr         ; print number1
-  mov rax,[number1]
-  shr rax,2             ; divide by 4 (logic)
+  mov rax, [number1]
+  shr rax, 2            ; divide by 4 (logic)
   mov rsi, rax
   call printres
                         ; negative number
@@ -75,8 +75,8 @@ main:
   call printmsg         ; print heading
   mov rsi, [number2]
   call printnbr         ; print number2
-  mov rax,[number2]
-  shr rax,2             ; divide by 4 (logic)
+  mov rax, [number2]
+  shr rax, 2            ; divide by 4 (logic)
   mov [result], rax
   mov rsi, rax
   call printres
@@ -86,8 +86,8 @@ main:
   call printmsg         ; print heading
   mov rsi, [number1]
   call printnbr         ; print number1
-  mov rax,[number1]
-  sar rax,2             ; divide by 4 (arithmetic)
+  mov rax, [number1]
+  sar rax, 2            ; divide by 4 (arithmetic)
   mov rsi, rax
   call printres
                         ; negative number
@@ -95,8 +95,8 @@ main:
   call printmsg         ; print heading
   mov rsi, [number2]
   call printnbr         ; print number2
-  mov rax,[number2]
-  sar rax,2             ; divide by 4 (arithmetic)
+  mov rax, [number2]
+  sar rax, 2            ; divide by 4 (arithmetic)
   mov rsi, rax
   call printres
   leave
@@ -105,32 +105,32 @@ main:
 ;-----------------------------------
 printmsg: ; print the title
   section .data
-    .fmtstr db 10,"%s",10,0 ; format for a string
+    .fmtstr db 10,"%s", 10, 0 ; format for a string
 
   section .text
-    mov rdi,.fmtstr
-    mov rax,0
+    mov rdi, .fmtstr
+    mov rax, 0
     call printf
     ret
 
 ;-----------------------------------
 printnbr: ; print the number
   section .data
-    .fmtstr db "The original number is %lld",10,0
+    .fmtstr db "The original number is %lld", 10, 0
 
   section .text
-    mov rdi,.fmtstr
-    mov rax,0
+    mov rdi, .fmtstr
+    mov rax, 0
     call printf
     ret
 
 ;-----------------------------------
 printres: ; print the result
   section .data
-    .fmtstr db "The resulting number is %lld",10,0
+    .fmtstr db "The resulting number is %lld", 10, 0
 
   section .text
-    mov rdi,.fmtstr
-    mov rax,0
+    mov rdi, .fmtstr
+    mov rax, 0
     call printf
     ret
