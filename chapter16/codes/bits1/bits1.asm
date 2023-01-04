@@ -123,13 +123,13 @@ main:
   call printmsg
   ; ror and print
   mov rax, [number1]
-  ror al,2
+  ror al, 2
   mov rdi, rax
   call printb
   mov rsi, msg12
   call printmsg
   mov rax, [number2]
-  ror al,2
+  ror al, 2
   mov rdi, rax
   call printb
   leave
