@@ -5,7 +5,8 @@ extern printf
 
 section .data
   number  dq 5
-  fmt     db "The sum from 0 to %ld is %ld",10,0
+  fmt     db "The sum from 0 to %ld is %ld", 10, 0
+
 section .bss
 
 section .text
