@@ -5,8 +5,8 @@ extern printf
 section .data
   number1 dq 42
   number2 dq 41
-  fmt1 db "NUMBER1 > = NUMBER2",10,0
-  fmt2 db "NUMBER1 < NUMBER2",10,0
+  fmt1 db "NUMBER1 > = NUMBER2", 10, 0
+  fmt2 db "NUMBER1 < NUMBER2", 10, 0
 
 section .bss
 

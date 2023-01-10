@@ -1,4 +1,4 @@
-# betterloop
+# betterloop.s
 .intel_syntax noprefix
 
 .extern printf

@@ -1,4 +1,4 @@
-# jumploop.asm
+# jumploop.s
 # calculate 1+2+...+5
 .intel_syntax noprefix
 
