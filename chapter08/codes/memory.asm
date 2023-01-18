@@ -6,9 +6,9 @@ section .data
   warray  times 5 dw 0 ; array of 5 words containing 0
   dNum    dd 12345
   qNum1   dq 12345
-  text1   db "abc",0
+  text1   db "abc", 0
   qNum2   dq 3.141592654
-  text2   db "cde",0
+  text2   db "cde", 0
 
 section .bss
   bvar resb 1

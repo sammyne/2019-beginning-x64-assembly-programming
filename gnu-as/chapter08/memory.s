@@ -2,6 +2,7 @@
 
 .intel_syntax noprefix
 
+
 .data
 
 bNum:   .byte 123
