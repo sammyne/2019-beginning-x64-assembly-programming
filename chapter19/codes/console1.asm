@@ -1,13 +1,13 @@
 ; console1.asm
 
 section .data
-  msg1      db "Hello, World!",10,0
+  msg1      db "Hello, World!", 10, 0
   msg1len   equ $-msg1
-  msg2      db "Your turn: ",0
+  msg2      db "Your turn: ", 0
   msg2len   equ $-msg2
-  msg3      db "You answered: ",0
+  msg3      db "You answered: ", 0
   msg3len   equ $-msg3
-  inputlen  equ 10 ; length of inputbuffer
+  inputlen  equ 10      ; length of inputbuffer
 
 section .bss
   input resb inputlen+1 ; provide space for ending 0
@@ -18,7 +18,7 @@ global main
 
 main:
   push rbp
-  mov rbp,rsp
+  mov rbp, rsp
   mov rsi, msg1     ; print first string
   mov rdx, msg1len
   call prints

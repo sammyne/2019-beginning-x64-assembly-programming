@@ -1,9 +1,9 @@
 ; console2.asm
 
 section .data
-  msg1      db "Hello, World!",10,0
-  msg2      db "Your turn (only a-z): ",0
-  msg3      db "You answered: ",0
+  msg1      db "Hello, World!", 10, 0
+  msg2      db "Your turn (only a-z): ", 0
+  msg3      db "You answered: ", 0
   inputlen  equ 10 ; length of inputbuffer
   NL        db 0xa
 
@@ -16,7 +16,7 @@ global main
 
 main:
   push rbp
-  mov rbp,rsp
+  mov rbp, rsp
   mov rdi, msg1     ; print first string
   call prints
   mov rdi, msg2     ; print second string, no NL
@@ -28,7 +28,7 @@ main:
   call prints
   mov rdi, input    ; print the inputbuffer
   call prints
-  mov rdi,NL        ; print NL
+  mov rdi, NL       ; print NL
   call prints
   leave
   ret
@@ -49,12 +49,12 @@ prints:
   inc r12
   jmp .lengthloop
 
-.lengthfound: ; print the string, length in rdx
-  cmp rdx, 0  ; no string (0 length)
+.lengthfound:   ; print the string, length in rdx
+  cmp rdx, 0    ; no string (0 length)
   je .done
-  mov rsi,rdi ; rdi contains address of string
-  mov rax, 1  ; 1 = write
-  mov rdi, 1  ; 1 = stdout
+  mov rsi, rdi  ; rdi contains address of string
+  mov rax, 1    ; 1 = write
+  mov rdi, 1    ; 1 = stdout
   syscall
 
 .done:
@@ -93,13 +93,13 @@ reads:
   inc r14               ; inc counter
   cmp r14, r13
   ja .readc             ; buffer max reached, ignore
-  mov byte [r12], al    ; safe the char in the buffer
+  mov byte [r12], al    ; save the char in the buffer
   inc r12               ; point to next char in buffer
   jmp .readc
 
 .done:
   inc r12
-  mov byte [r12],0  ; add end 0 to inputbuffer
+  mov byte [r12], 0  ; add end 0 to inputbuffer
   pop r14           ; callee saved
   pop r13           ; callee saved
   pop r12           ; callee saved
