@@ -29,33 +29,33 @@ section .data
   S_IWUSR           equ 00200q  ; user write permission
   NL                equ 0xa
   bufferlen         equ 64
-  fileName          db "testfile.txt",0
+  fileName          db "testfile.txt", 0
   FD                dq 0 ; file descriptor
-  text1             db "1. Hello...to everyone!",NL,0
-  len1              dq $-text1-1 ;remove 0
-  text2             db "2. Here I am!",NL,0
-  len2              dq $-text2-1 ;remove 0
-  text3             db "3. Alife and kicking!",NL,0
-  len3              dq $-text3-1 ;remove 0
-  text4             db "Adios !!!",NL,0
+  text1             db "1. Hello...to everyone!", NL, 0
+  len1              dq $-text1-1 ; remove 0
+  text2             db "2. Here I am!", NL, 0
+  len2              dq $-text2-1 ; remove 0
+  text3             db "3. Alife and kicking!", NL, 0
+  len3              dq $-text3-1 ; remove 0
+  text4             db "Adios !!!", NL, 0
   len4              dq $-text4-1
-  error_Create      db "error creating file",NL,0
-  error_Close       db "error closing file",NL,0
-  error_Write       db "error writing to file",NL,0
-  error_Open        db "error opening file",NL,0
-  error_Append      db "error appending to file",NL,0
-  error_Delete      db "error deleting file",NL,0
-  error_Read        db "error reading file",NL,0
-  error_Print       db "error printing string",NL,0
-  error_Position    db "error positioning in file",NL,0
-  success_Create    db "File created and opened",NL,0
-  success_Close     db "File closed",NL,NL,0
-  success_Write     db "Written to file",NL,0
-  success_Open      db "File opened for R/W",NL,0
-  success_Append    db "File opened for appending",NL,0
-  success_Delete    db "File deleted",NL,0
-  success_Read      db "Reading file",NL,0
-  success_Position  db "Positioned in file",NL,0
+  error_Create      db "error creating file", NL, 0
+  error_Close       db "error closing file", NL, 0
+  error_Write       db "error writing to file", NL, 0
+  error_Open        db "error opening file", NL, 0
+  error_Append      db "error appending to file", NL, 0
+  error_Delete      db "error deleting file", NL, 0
+  error_Read        db "error reading file", NL, 0
+  error_Print       db "error printing string", NL, 0
+  error_Position    db "error positioning in file", NL, 0
+  success_Create    db "File created and opened", NL, 0
+  success_Close     db "File closed", NL, NL, 0
+  success_Write     db "Written to file", NL, 0
+  success_Open      db "File opened for R/W", NL, 0
+  success_Append    db "File opened for appending", NL, 0
+  success_Delete    db "File deleted", NL, 0
+  success_Read      db "Reading file", NL, 0
+  success_Position  db "Positioned in file", NL, 0
 
 section .bss
   buffer resb bufferlen
@@ -66,7 +66,7 @@ global main
 
 main:
   push rbp
-  mov rbp,rsp
+  mov rbp, rsp
   %IF CREATE
   ;CREATE AND OPEN A FILE, THEN CLOSE --------------------
   ; create and open file
@@ -119,12 +119,12 @@ main:
   call openFile
   mov qword [FD], rax ; save file descriptor
   ; position file at offset
-  mov rdi, qword[FD]
-  mov rsi, qword[len2] ;offset at this location
+  mov rdi, qword [FD]
+  mov rsi, qword [len2] ;offset at this location
   mov rdx, 0
   call positionFile
   ; write to file at offset
-  mov rdi, qword[FD]
+  mov rdi, qword [FD]
   mov rsi, text4
   mov rdx, qword [len4]
   call writeFile
@@ -143,7 +143,7 @@ main:
   mov rsi, buffer
   mov rdx, bufferlen
   call readFile
-  mov rdi,rax
+  mov rdi, rax
   call printString
   ; close file
   mov rdi, qword [FD]
@@ -156,8 +156,8 @@ main:
   call openFile
   mov qword [FD], rax ; save file descriptor
   ; position file at offset
-  mov rdi, qword[FD]
-  mov rsi, qword[len2] ;skip the first line
+  mov rdi, qword [FD]
+  mov rsi, qword [len2] ;skip the first line
   mov rdx, 0
   call positionFile
   ; read from file
@@ -189,7 +189,7 @@ readFile:
   syscall ; rax contains # of characters read
   cmp rax, 0
   jl readerror
-  mov byte [rsi+rax],0 ; add a terminating zero
+  mov byte [rsi+rax], 0 ; add a terminating zero
   mov rax, rsi
   mov rdi, success_Read
   push rax ; caller saved
@@ -229,9 +229,9 @@ appendFile:
   cmp rax, 0
   jl appenderror
   mov rdi, success_Append
-  push rax ; caller saved
+  push rax  ; caller saved
   call printString
-  pop rax ; caller saved
+  pop rax   ; caller saved
   ret
 
 appenderror:
@@ -249,9 +249,9 @@ openFile:
   cmp rax, 0
   jl openerror
   mov rdi, success_Open
-  push rax ; caller saved
+  push rax  ; caller saved
   call printString
-  pop rax ; caller saved
+  pop rax   ; caller saved
   ret
 
 openerror:
@@ -315,14 +315,14 @@ global createFile
 
 createFile:
   mov rax, NR_create
-  mov rsi, S_IRUSR |S_IWUSR
+  mov rsi, S_IRUSR | S_IWUSR
   syscall
-  cmp rax, 0 ; file descriptor in rax
+  cmp rax, 0                ; file descriptor in rax
   jl createerror
   mov rdi, success_Create
-  push rax ; caller saved
+  push rax                  ; caller saved
   call printString
-  pop rax ; caller saved
+  pop rax                   ; caller saved
   ret
 
 createerror:
@@ -349,7 +349,7 @@ strLoop:
 strDone:
   cmp rdx, 0 ; no string (0 length)
   je prtDone
-  mov rsi,rdi
+  mov rsi, rdi
   mov rax, 1
   mov rdi, 1
   syscall
