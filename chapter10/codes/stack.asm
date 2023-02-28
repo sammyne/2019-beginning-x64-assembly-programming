@@ -3,10 +3,10 @@
 extern printf
 
 section .data
-  strng     db "ABCDE",0
+  strng     db "ABCDE", 0
   strngLen  equ $-strng-1 ; stringlength without 0
-  fmt1      db "The original string: %s",10,0
-  fmt2      db "The reversed string: %s",10,0
+  fmt1      db "The original string: %s", 10, 0
+  fmt2      db "The reversed string: %s", 10, 0
 
 section .bss
 
