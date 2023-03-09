@@ -5,9 +5,9 @@ extern printf
 section .data
   ; template 0123456789abcdef0123456789abcdef0123456789abcd e
   ; template 1234567890123456789012345678901234567890123456 7
-  string1 db "The quick brown fox jumps over the lazy river.",0
-  fmt1    db "This is our string: %s ",10,0
-  fmt2    db "Our string is %d characters long.",10,0
+  string1 db "The quick brown fox jumps over the lazy river.", 0
+  fmt1    db "This is our string: %s ", 10, 0
+  fmt2    db "Our string is %d characters long.", 10, 0
 
 section .bss
 
@@ -34,8 +34,8 @@ main:
 ;function to compute string length-------------------------
 pstrlen:
   push rbp
-  mov rbp,rsp
-  mov rax, -16 ; avoid changing later
+  mov rbp, rsp
+  mov rax, -16    ; avoid changing later
   pxor xmm0, xmm0 ; 0 (end of string)
 
 .not_found:
