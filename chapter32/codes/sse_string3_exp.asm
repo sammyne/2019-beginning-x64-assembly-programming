@@ -14,10 +14,10 @@ section .data
   string3     db "the quick brown fox jumps over the "
               db "lazy dog"
   string3Len  equ $ - string3
-  fmt1        db "Strings 1 and 2 are equal.",10,0
-  fmt11       db "Strings 1 and 2 differ at position %i.",10,0
-  fmt2        db "Strings 2 and 3 are equal.",10,0
-  fmt22       db "Strings 2 and 3 differ at position %i.",10,0
+  fmt1        db "Strings 1 and 2 are equal.", 10, 0
+  fmt11       db "Strings 1 and 2 differ at position %i.", 10, 0
+  fmt2        db "Strings 2 and 3 are equal.", 10, 0
+  fmt22       db "Strings 2 and 3 differ at position %i.", 10, 0
 
 section .bss
   buffer resb 64
@@ -28,7 +28,7 @@ global main
 
 main:
   push rbp
-  mov rbp,rsp
+  mov rbp, rsp
   ; compare string 1 and 2
   mov rdi, string1
   mov rsi, string2
@@ -40,28 +40,28 @@ main:
   ;-------------------------------------------------------------
   ; first build the string with newline and terminating 0
   ; string1
-  mov rsi,string1
-  mov rdi,buffer
-  mov rcx,string1Len
+  mov rsi, string1
+  mov rdi, buffer
+  mov rcx, string1Len
   rep movsb
-  mov byte[rdi],10  ; add NL to buffer
-  inc rdi           ; add terminating 0 to buffer
-  mov byte[rdi],0
+  mov byte [rdi], 10  ; add NL to buffer
+  inc rdi             ; add terminating 0 to buffer
+  mov byte [rdi], 0
   ; print
   mov rdi, buffer
-  xor rax,rax
+  xor rax, rax
   call printf
   ; string2
   mov rsi, string2
   mov rdi, buffer
   mov rcx, string2Len
   rep movsb
-  mov byte[rdi], 10 ; add NL to buffer
-  inc rdi           ; add terminating 0 to buffer
-  mov byte[rdi],0
+  mov byte [rdi], 10  ; add NL to buffer
+  inc rdi             ; add terminating 0 to buffer
+  mov byte [rdi], 0
   ; print
   mov rdi, buffer
-  xor rax,rax
+  xor rax, rax
   call printf
   ;-------------------------------------------------------------
                     ; now print the result of the comparison
@@ -88,16 +88,16 @@ eql1:
   ;-------------------------------------------------------------
   ; first build the string with newline and terminating 0
   ; string3
-  mov rsi,string3
-  mov rdi,buffer
-  mov rcx,string3Len
+  mov rsi, string3
+  mov rdi, buffer
+  mov rcx, string3Len
   rep movsb
-  mov byte[rdi],10  ; add NL to buffer
-  inc rdi           ; add terminating 0 to buffer
-  mov byte[rdi],0
+  mov byte [rdi], 10  ; add NL to buffer
+  inc rdi             ; add terminating 0 to buffer
+  mov byte [rdi], 0
                     ; print
   mov rdi, buffer
-  xor rax,rax
+  xor rax, rax
   call printf
   ;-------------------------------------------------------------
                     ; now print the result of the comparison
@@ -130,18 +130,18 @@ pstrcmp:
   jc .differ
   jz .equal
   add rbx, 16
-  sub rax,16
-  sub rdx,16
+  sub rax, 16
+  sub rdx, 16
   jmp .loop
 
 .differ:
-  mov rax,rbx
-  add rax,rcx                       ; rcx contains the differing position
+  mov rax, rbx
+  add rax, rcx                      ; rcx contains the differing position
   inc rax                           ; because the counter starts at 0
   jmp exit
 
 .equal:
-  xor rax,rax
+  xor rax, rax
 
 exit:
   leave
