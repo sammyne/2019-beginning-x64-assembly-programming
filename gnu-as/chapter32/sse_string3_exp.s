@@ -8,7 +8,7 @@
 .data
 string1:
   .ascii "the quick brown fox jumps over the lazy river"
-string1Len  = . - string1
+  .equ string1Len, . - string1
 string2:
   .ascii "the quick brown fox jumps over the lazy river"
 string2Len  = . - string2
