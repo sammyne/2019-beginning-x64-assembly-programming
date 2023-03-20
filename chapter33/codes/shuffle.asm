@@ -57,10 +57,10 @@ main:
   call printf
   ; build xmm0 with the numbers
   pxor xmm0, xmm0
-  pinsrd xmm0, dword[number1], 0
-  pinsrd xmm0, dword[number2], 1
-  pinsrd xmm0, dword[number3], 2
-  pinsrd xmm0, dword[number4], 3
+  pinsrd xmm0, dword [number1], 0
+  pinsrd xmm0, dword [number2], 1
+  pinsrd xmm0, dword [number3], 2
+  pinsrd xmm0, dword [number4], 3
   movdqu [rbp-16], xmm0         ; save xmm0 for later use
   mov rdi, fmt00
   call printf                   ; print title
