@@ -10,9 +10,9 @@ int main(void) {
   printf("The global variables are %d and %d\n", a, b);
   __asm__(
       ".intel_syntax noprefix\n"
-      "mov rax,a \n"
-      "add rax,b \n"
-      "mov bsum,rax \n" ::
+      "mov rax, a \n"
+      "add rax, b \n"
+      "mov bsum, rax \n" ::
           : "rax");
   printf("The extended inline sum of global variables is %d.\n\n", bsum);
 
@@ -21,17 +21,17 @@ int main(void) {
 
   __asm__(
       ".intel_syntax noprefix;"
-      "mov rax,rdx;"
-      "add rax,rcx;"
+      "mov rax, rdx;"
+      "add rax, rcx;"
       : "=a"(esum)
       : "d"(x), "c"(y));
   printf("The extended inline sum is %d.\n", esum);
 
   __asm__(
       ".intel_syntax noprefix;"
-      "mov rbx,rdx;"
-      "imul rbx,rcx;"
-      "mov rax,rbx;"
+      "mov rbx, rdx;"
+      "imul rbx, rcx;"
+      "mov rax, rbx;"
       : "=a"(eproduct)
       : "d"(x), "c"(y)
       : "rbx");
@@ -39,8 +39,8 @@ int main(void) {
 
   __asm__(
       ".intel_syntax noprefix;"
-      "mov rax,rdx;"
-      "sub rax,rcx;"
+      "mov rax, rdx;"
+      "sub rax, rcx;"
       : "=a"(edif)
       : "d"(x), "c"(y));
   printf("The extended inline asm difference is %d.\n", edif);

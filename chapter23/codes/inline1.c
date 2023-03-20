@@ -10,9 +10,9 @@ int main(void) {
   printf("The numbers are %d and %d\n", x, y);
   __asm__(
       ".intel_syntax noprefix;"
-      "mov rax,x;"
-      "add rax,y;"
-      "mov sum,rax");
+      "mov rax, x;"
+      "add rax, y;"
+      "mov sum, rax");
   printf("The sum is %d.\n", sum);
   printf("The difference is %d.\n", subtract());
   multiply();
@@ -22,16 +22,16 @@ int main(void) {
 int subtract(void) {
   __asm__(
       ".intel_syntax noprefix;"
-      "mov rax,x;"
-      "sub rax,y"  // return value in rax
+      "mov rax, x;"
+      "sub rax, y"  // return value in rax
   );
 }
 
 void multiply(void) {
   __asm__(
       ".intel_syntax noprefix;"
-      "mov rax,x;"
-      "imul rax,y;"
-      "mov prod,rax"  // no return value, result in prod
+      "mov rax, x;"
+      "imul rax, y;"
+      "mov prod, rax"  // no return value, result in prod
   );
 }
