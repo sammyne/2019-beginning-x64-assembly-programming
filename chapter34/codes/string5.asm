@@ -7,12 +7,12 @@ extern printf
 section .data
   string1     db "eeAecdkkFijlmeoZa"
               db "bcefgeKlkmeDad"
-              db "fdsafadfaseeE",10,0
-  startrange  db "A",10,0             ; look for uppercase
-  stoprange   db "Z",10,0
-  NL          db 10,0
-  fmt         db "Find the uppercase letters in:",10,0
-  fmt_oc      db "I found %ld uppercase letters",10,0
+              db "fdsafadfaseeE", 10 ,0
+  startrange  db "A", 10 ,0             ; look for uppercase
+  stoprange   db "Z", 10 ,0
+  NL          db 10, 0
+  fmt         db "Find the uppercase letters in:", 10 ,0
+  fmt_oc      db "I found %ld uppercase letters", 10 ,0
 
 section .bss
 
@@ -22,13 +22,13 @@ global main
 
 main:
   push rbp
-  mov rbp,rsp
+  mov rbp, rsp
                       ; first print the string
   mov rdi, fmt        ; title
-  xor rax,rax
+  xor rax, rax
   call printf
   mov rdi, string1    ; string
-  xor rax,rax
+  xor rax, rax
   call printf
                       ; search the string
   mov rdi, string1
@@ -48,21 +48,21 @@ main:
 prangesrch: ; packed range search
   push rbp
   mov rbp, rsp
-  sub rsp, 16               ; room for pushing xmm1
-  xor r12, r12              ; for the number of occurences
-  xor rcx, rcx              ; for signaling the end
-  xor rbx, rbx              ; for address calculation
-  mov rax, -16              ; avoid ZF flag setting
-                            ; build xmm1
-  pxor xmm1, xmm1           ; make sure everything is cleared
-  pinsrb xmm1, byte[rsi], 0 ; startrange at index 0
-  pinsrb xmm1, byte[rdx], 1 ; stoprange at index 1
+  sub rsp, 16                 ; room for pushing xmm1
+  xor r12, r12                ; for the number of occurences
+  xor rcx, rcx                ; for signaling the end
+  xor rbx, rbx                ; for address calculation
+  mov rax, -16                ; avoid ZF flag setting
+                              ; build xmm1
+  pxor xmm1, xmm1             ; make sure everything is cleared
+  pinsrb xmm1, byte [rsi], 0  ; startrange at index 0
+  pinsrb xmm1, byte [rdx], 1  ; stoprange at index 1
 
 .loop:
   add rax, 16
   mov rsi, 16                     ; if no terminating 0, print 16 bytes
   movdqu xmm2, [rdi+rbx]
-  pcmpistrm xmm1, xmm2, 01000100b ; equal each|byte mask in xmm0
+  pcmpistrm xmm1, xmm2, 01000100b ; equal range | byte mask in xmm0
   setz cl                         ; terminating 0 detected
                                   ; if terminating 0 found, determine position
   cmp cl, 0
@@ -84,9 +84,9 @@ prangesrch: ; packed range search
                     ; keep running total of matches
   popcnt r13d, r13d ; count the number of 1 bits
   add r12d, r13d    ; keep the number of occurences in r12
-  or cl,cl          ; terminating 0 detected?
+  or cl, cl         ; terminating 0 detected?
   jnz .exit
-  add rbx,16        ; prepare for next block
+  add rbx, 16       ; prepare for next block
   jmp .loop
 
 .exit:
@@ -99,9 +99,9 @@ prangesrch: ; packed range search
 ;-------------------------------------------------------------
 pstrlen:
   push rbp
-  mov rbp,rsp
-  sub rsp,16            ; for pushing xmm0
-  movdqu [rbp-16],xmm0  ; push xmm0
+  mov rbp, rsp
+  sub rsp, 16           ; for pushing xmm0
+  movdqu [rbp-16], xmm0 ; push xmm0
   mov rax, -16          ; avoid ZF flag setting later
   pxor xmm0, xmm0       ; search for 0 (end of string)
 
@@ -111,7 +111,7 @@ pstrlen:
   jnz .loop                         ; 0 found?
   add rax, rcx                      ; rax = bytes already handled
                                     ; rcx = bytes handled in terminating loop
-  movdqu xmm0,[rbp-16]              ; pop xmm0
+  movdqu xmm0, [rbp-16]             ; pop xmm0
   leave
   ret
 

@@ -7,14 +7,14 @@ extern printf
 section .data
   string1 db "qdacdekkfijlmdoza"
           db "becdfgdklkmdddaf"
-          db "fffffffdedeee",10,0
-  string2 db "e",0
-  string3 db "a",0
+          db "fffffffdedeee", 10, 0
+  string2 db "e", 0
+  string3 db "a", 0
   fmt     db "Find all the characters '%s' "
-          db "and '%s' in:",10,0
-  fmt_oc  db "I found %ld characters '%s'"
-          db "and '%s'",10,0
-  NL      db 10,0
+          db "and '%s' in:", 10, 0
+  fmt_oc  db "I found %ld characters '%s' "
+          db "and '%s'", 10, 0
+  NL      db 10, 0
 
 section .bss
 
@@ -55,21 +55,21 @@ main:
 pcharsrch: ; packed character search
   push rbp
   mov rbp, rsp
-  sub rsp, 16               ; provide stack space for pushing xmm1
-  xor r12, r12              ; for the running total of occurrences
-  xor rcx, rcx              ; for signaling the end
-  xor rbx, rbx              ; for address calculation
-  mov rax, -16              ; for counting bytes, avoid flag setting
-                            ; build xmm1, load the search character
-  pxor xmm1, xmm1           ; clear xmm1
-  pinsrb xmm1, byte[rsi], 0 ; first char at index 0
-  pinsrb xmm1, byte[rdx], 1 ; second char at index 1
+  sub rsp, 16                 ; provide stack space for pushing xmm1
+  xor r12, r12                ; for the running total of occurrences
+  xor rcx, rcx                ; for signaling the end
+  xor rbx, rbx                ; for address calculation
+  mov rax, -16                ; for counting bytes, avoid flag setting
+                              ; build xmm1, load the search character
+  pxor xmm1, xmm1             ; clear xmm1
+  pinsrb xmm1, byte [rsi], 0  ; first char at index 0
+  pinsrb xmm1, byte [rdx], 1  ; second char at index 1
 
 .loop:
   add rax, 16               ; avoid ZF flag setting
   mov rsi, 16               ; if no terminating 0, print 16 bytes
   movdqu xmm2, [rdi+rbx]    ; load 16 bytes of the string in xmm2
-  pcmpistrm xmm1, xmm2, 40h ; 'equal each' and 'byte mask in xmm0'
+  pcmpistrm xmm1, xmm2, 40h ; 'equal any' and 'byte mask in xmm0'
   setz cl                   ; if terminating 0 detected
                             ; if terminating 0 found, determine position
   cmp cl, 0
@@ -157,8 +157,8 @@ reverse_xmm0:
     mov rbp, rsp
     sub rsp, 16
     movdqu [rbp-16], xmm2
-    movdqu xmm2, [.bytereverse]  ; load the mask in xmm2
-    pshufb xmm0, xmm2            ; do the shuffle
-    movdqu xmm2, [rbp-16]        ; pop xmm2
-    leave                       ; returns the shuffled xmm0
+    movdqu xmm2, [.bytereverse]   ; load the mask in xmm2
+    pshufb xmm0, xmm2             ; do the shuffle
+    movdqu xmm2, [rbp-16]         ; pop xmm2
+    leave                         ; returns the shuffled xmm0
     ret
