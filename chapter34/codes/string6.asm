@@ -7,11 +7,11 @@ extern printf
 section .data
   string1 db "a quick pink dinosour jumps over the "
           db "lazy river and the lazy dinosour "
-          db "doesn't mind",10,0
-  string2 db "dinosour",0
-  NL      db 10,0
-  fmt     db "Find the substring '%s' in:",10,0
-  fmt_oc  db "I found %ld %ss",10,0
+          db "doesn't mind", 10, 0
+  string2 db "dinosour", 0
+  NL      db 10, 0
+  fmt     db "Find the substring '%s' in:", 10, 0
+  fmt_oc  db "I found %ld %ss", 10, 0
 
 section .bss
 
@@ -60,7 +60,7 @@ psubstringsrch: ; packed substring search
   add rax, 16                     ; avoid ZF flag setting
   mov rsi, 16                     ; if no 0, print 16 bytes
   movdqu xmm2, [rdi+rbx]
-  pcmpistrm xmm1, xmm2, 01001100b ; 'equal ordered'|'byte mask in xmm0'
+  pcmpistrm xmm1, xmm2, 01001100b ; 'equal ordered' | 'byte mask in xmm0'
   setz cl                         ; terminating 0 detected
                                   ; if terminating 0 found, determine position
   cmp cl, 0
