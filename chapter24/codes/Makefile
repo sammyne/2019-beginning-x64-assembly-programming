@@ -7,9 +7,11 @@ apps = $(srcs:./%.asm=%)
 all: $(apps)
 
 $(apps): %: %.asm
-	nasm -f elf64 -g -F dwarf $^ -l $@.lst
-	gcc -g -o $@.out $@.o -no-pie
-	- ./$@.out
+	@echo "---"
+	@echo "compile and run $@"
+	@nasm -f elf64 -g -F dwarf $^ -l $@.lst
+	@gcc -g -o $@.out $@.o -no-pie
+	@- ./$@.out
 
 .PHONY: clean
 clean:
