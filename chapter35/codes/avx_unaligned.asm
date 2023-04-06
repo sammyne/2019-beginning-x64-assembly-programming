@@ -27,12 +27,12 @@ section .data
             dq 6.6
             dq 7.7
             dq 8.8
-  fmt1      db "Single Precision Vector 1:",10,0
-  fmt2      db 10,"Single Precision Vector 2:",10,0
-  fmt3      db 10,"Sum of Single Precision Vector 1 and Vector 2:",10,0
-  fmt4      db 10,"Double Precision Vector 1:",10,0
-  fmt5      db 10,"Double Precision Vector 2:",10,0
-  fmt6      db 10,"Sum of Double Precision Vector 1 and Vector 2:",10,0
+  fmt1      db "Single Precision Vector 1:", 10, 0
+  fmt2      db 10, "Single Precision Vector 2:", 10, 0
+  fmt3      db 10, "Sum of Single Precision Vector 1 and Vector 2:", 10, 0
+  fmt4      db 10, "Double Precision Vector 1:", 10, 0
+  fmt5      db 10, "Double Precision Vector 2:", 10, 0
+  fmt6      db 10, "Sum of Double Precision Vector 1 and Vector 2:", 10, 0
 
 section .bss
   spvector_res resd 8
@@ -49,8 +49,8 @@ main:
   ; load vector1 in the register ymm0
   vmovups ymm0, [spvector1]
   ; extract ymm0
-  vextractf128 xmm2, ymm0,0 ; first part of ymm0
-  vextractf128 xmm2, ymm0,1 ; second part of ymm0
+  vextractf128 xmm2, ymm0, 0 ; first part of ymm0
+  vextractf128 xmm2, ymm0, 1 ; second part of ymm0
   ; load vector2 in the register ymm1
   vmovups ymm1, [spvector2]
   ; extract ymm1
@@ -104,8 +104,8 @@ main:
 
 printspfpv:
   section .data
-    .NL   db 10,0
-    .fmt1 db "%.1f, ",0
+    .NL   db 10, 0
+    .fmt1 db "%.1f, ", 0
   section .text
     push rbp
     mov rbp, rsp
@@ -136,8 +136,8 @@ printspfpv:
 
 printdpfpv:
   section .data
-    .NL   db 10,0
-    .fmt  db "%.1f, %.1f, %.1f, %.1f",0
+    .NL   db 10, 0
+    .fmt  db "%.1f, %.1f, %.1f, %.1f", 0
   section .text
     push rbp
     mov rbp, rsp

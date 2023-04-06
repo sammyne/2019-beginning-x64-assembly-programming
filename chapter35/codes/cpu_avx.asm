@@ -3,12 +3,12 @@
 extern printf
 
 section .data
-  fmt_noavx     db "This cpu does not support AVX.",10,0
-  fmt_avx       db "This cpu supports AVX.",10,0
-  fmt_noavx2    db "This cpu does not support AVX2.",10,0
-  fmt_avx2      db "This cpu supports AVX2.",10,0
-  fmt_noavx512  db "This cpu does not support AVX-512.",10,0
-  fmt_avx512    db "This cpu supports AVX-512.",10,0
+  fmt_noavx     db "This cpu does not support AVX.", 10, 0
+  fmt_avx       db "This cpu supports AVX.", 10, 0
+  fmt_noavx2    db "This cpu does not support AVX2.", 10, 0
+  fmt_avx2      db "This cpu supports AVX2.", 10, 0
+  fmt_noavx512  db "This cpu does not support AVX-512.", 10, 0
+  fmt_avx512    db "This cpu supports AVX-512.", 10, 0
 
 section .bss
 
@@ -18,7 +18,7 @@ global main
 
 main:
   push rbp
-  mov rbp,rsp
+  mov rbp, rsp
   call cpu_sse ; returns 1 in rax if AVX supported, otherwise 0
   leave
   ret
@@ -65,17 +65,17 @@ no_avx:
   jmp the_exit        ; and exits
 
 no_avx2:
-  mov rdi,fmt_noavx2
-  xor rax,rax
-  call printf       ; displays message if AVX not available
-  xor rax,rax       ; returns 0, no AVX
-  jmp the_exit      ; and exits
+  mov rdi, fmt_noavx2
+  xor rax, rax
+  call printf         ; displays message if AVX not available
+  xor rax, rax        ; returns 0, no AVX
+  jmp the_exit        ; and exits
 
 no_avx512:
-  mov rdi,fmt_noavx512
-  xor rax,rax
+  mov rdi, fmt_noavx512
+  xor rax, rax
   call printf           ; displays message if AVX not available
-  xor rax,rax           ; returns 0, no AVX
+  xor rax, rax          ; returns 0, no AVX
   jmp the_exit          ; and exits
 
 the_exit:
