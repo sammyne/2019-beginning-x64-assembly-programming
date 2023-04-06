@@ -7,6 +7,8 @@ apps = $(srcs:./%.asm=%)
 all: $(apps)
 
 $(apps): %: %.asm
+	@echo ""
+	@echo "build and run $@.out"
 	nasm -f elf64 -g -F dwarf $^ -l $@.lst
 	gcc -g -o $@.out $@.o -no-pie
 	- ./$@.out
