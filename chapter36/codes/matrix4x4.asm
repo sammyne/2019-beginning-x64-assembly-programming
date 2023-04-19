@@ -3,17 +3,17 @@
 extern printf
 
 section .data
-  fmt0    db 10,"4x4 DOUBLE PRECISION FLOATING POINT MATRICES",10,0
-  fmt1    db 10,"This is matrixA:",10,0
-  fmt2    db 10,"This is matrixB:",10,0
-  fmt3    db 10,"This is matrixA x matrixB:",10,0
-  fmt4    db 10,"This is matrixC:",10,0
-  fmt5    db 10,"This is the inverse of matrixC:",10,0
-  fmt6    db 10,"Proof: matrixC x inverse =",10,0
-  fmt7    db 10,"This is matrixS:",10,0
-  fmt8    db 10,"This is the inverse of matrixS:",10,0
-  fmt9    db 10,"Proof: matrixS x inverse =",10,0
-  fmt10   db 10,"This matrix is singular!",10,10,0
+  fmt0    db 10,"4x4 DOUBLE PRECISION FLOATING POINT MATRICES", 10, 0
+  fmt1    db 10,"This is matrixA:", 10, 0
+  fmt2    db 10,"This is matrixB:", 10, 0
+  fmt3    db 10,"This is matrixA x matrixB:", 10, 0
+  fmt4    db 10,"This is matrixC:", 10, 0
+  fmt5    db 10,"This is the inverse of matrixC:", 10, 0
+  fmt6    db 10,"Proof: matrixC x inverse =", 10, 0
+  fmt7    db 10,"This is matrixS:", 10, 0
+  fmt8    db 10,"This is the inverse of matrixS:", 10, 0
+  fmt9    db 10,"Proof: matrixS x inverse =", 10, 0
+  fmt10   db 10,"This matrix is singular!",10, 10, 0
 
   align 32
   matrixA dq 1., 3., 5., 7.
@@ -252,7 +252,7 @@ inverse4x4:
   vdivsd xmm0, xmm0, xmm15              ; 1/p4
                                         ; check for zero division
   stmxcsr [.mxcsr]
-  and dword[.mxcsr], 4
+  and dword [.mxcsr], 4
   jnz .singular
                                         ; no zero division
   pop rsi                               ; recall address of inverse matrix
@@ -301,15 +301,15 @@ vtrace:
 ;------------------------------------------------------
 printm4x4:
   section .data
-    .fmt db "%f",9,"%f",9, "%f",9,"%f",10,0
+    .fmt db "%f",9,"%f",9, "%f",9,"%f", 10, 0
   section .text
     push rbp
-    mov rbp,rsp
+    mov rbp, rsp
     push rbx      ; callee saved
     push r15      ; callee saved
-    mov rdi,.fmt
-    mov rcx,4
-    xor rbx,rbx   ; row counter
+    mov rdi, .fmt
+    mov rcx, 4
+    xor rbx, rbx   ; row counter
 
 .loop:
   movsd xmm0, [rsi+rbx]
