@@ -3,10 +3,10 @@
 extern printf
 
 section .data
-  fmt0    db "4x4 DOUBLE PRECISION FLOATING POINT MATRIX TRANSPOSE",10,0
-  fmt1    db 10,"This is the matrix:",10,0
-  fmt2    db 10,"This is the transpose (unpack):",10,0
-  fmt3    db 10,"This is the transpose (shuffle):",10,0
+  fmt0    db "4x4 DOUBLE PRECISION FLOATING POINT MATRIX TRANSPOSE", 10, 0
+  fmt1    db 10, "This is the matrix:", 10, 0
+  fmt2    db 10, "This is the transpose (unpack):", 10, 0
+  fmt3    db 10, "This is the transpose (shuffle):", 10, 0
   align 32
   matrix  dq 1., 2., 3., 4.
           dq 5., 6., 7., 8.
@@ -85,7 +85,7 @@ transpose_unpack_4x4:
 ;--------------------------------------------------------
 transpose_shuffle_4x4:
   push rbp
-  mov rbp,rsp
+  mov rbp, rsp
   ; load matrix into the registers
   vmovapd ymm0, [rdi]                       ; 1 2 3 4
   vmovapd ymm1, [rdi+32]                    ; 5 6 7 8
@@ -112,7 +112,7 @@ transpose_shuffle_4x4:
 ;--------------------------------------------------------
 printm4x4:
   section .data
-    .fmt db "%.f",9,"%.f",9, "%.f",9,"%.f",10,0
+    .fmt db "%.f", 9, "%.f", 9, "%.f", 9, "%.f", 10, 0
   section .text
     push rbp
     mov rbp, rsp
