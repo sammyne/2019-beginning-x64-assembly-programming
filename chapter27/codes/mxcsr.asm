@@ -10,15 +10,15 @@ section .data
   three         dq 3.0
   ten           dq 10.0
   zero          dq 0.0
-  hex           db "0x",0
-  fmt1          db 10,"Divide, default mxcsr:",10,0
-  fmt2          db 10,"Divide by zero, default mxcsr:",10,0
-  fmt4          db 10,"Divide, round up:",10,0
-  fmt5          db 10,"Divide, round down:",10,0
-  fmt6          db 10,"Divide, truncate:",10,0
-  f_div         db "%.1f divided by %.1f is %.16f, in hex: ",0
-  f_before      db 10,"mxcsr before:",9,0
-  f_after       db "mxcsr after:",9,0
+  hex           db "0x", 0
+  fmt1          db 10, "Divide, default mxcsr:", 10, 0
+  fmt2          db 10, "Divide by zero, default mxcsr:", 10, 0
+  fmt4          db 10, "Divide, round up:", 10, 0
+  fmt5          db 10, "Divide, round down:", 10, 0
+  fmt6          db 10, "Divide, truncate:", 10, 0
+  f_div         db "%.1f divided by %.1f is %.16f, in hex: ", 0
+  f_before      db 10, "mxcsr before:", 9, 0
+  f_after       db "mxcsr after:", 9, 0
   ; mxcsr values
   default_mxcsr dd 0001111110000000b
   round_nearest dd 0001111110000000b
@@ -37,76 +37,76 @@ global main
 
 main:
   push rbp
-  mov rbp,rsp
+  mov rbp, rsp
   ; division
   ; default mxcsr
-  mov rdi,fmt1
-  mov rsi,ten
-  mov rdx,two
+  mov rdi, fmt1
+  mov rsi, ten
+  mov rdx, two
   mov ecx, [default_mxcsr]
   call apply_mxcsr
   ;----------------------------------------------
   ; division with precision error
   ; default mxcsr
-  mov rdi,fmt1
-  mov rsi,ten
-  mov rdx,three
+  mov rdi, fmt1
+  mov rsi, ten
+  mov rdx, three
   mov ecx, [default_mxcsr]
   call apply_mxcsr
   ; divide by zero
   ; default mxcsr
-  mov rdi,fmt2
-  mov rsi,ten
-  mov rdx,zero
+  mov rdi, fmt2
+  mov rsi, ten
+  mov rdx, zero
   mov ecx, [default_mxcsr]
   call apply_mxcsr
   ; division with precision error
   ; round up
-  mov rdi,fmt4
-  mov rsi,ten
-  mov rdx,three
+  mov rdi, fmt4
+  mov rsi, ten
+  mov rdx, three
   mov ecx, [round_up]
   call apply_mxcsr
   ; division with precision error
   ; round up
-  mov rdi,fmt5
-  mov rsi,ten
-  mov rdx,three
+  mov rdi, fmt5
+  mov rsi, ten
+  mov rdx, three
   mov ecx, [round_down]
   call apply_mxcsr
   ; division with precision error
   ; truncate
-  mov rdi,fmt6
-  mov rsi,ten
-  mov rdx,three
+  mov rdi, fmt6
+  mov rsi, ten
+  mov rdx, three
   mov ecx, [truncate]
   call apply_mxcsr
   ;----------------------------------------------
   ; division with precision error
   ; default mxcsr
-  mov rdi,fmt1
-  mov rsi,eleven
-  mov rdx,three
+  mov rdi, fmt1
+  mov rsi, eleven
+  mov rdx, three
   mov ecx, [default_mxcsr]
   call apply_mxcsr  ; division with precision error
   ; round up
-  mov rdi,fmt4
-  mov rsi,eleven
-  mov rdx,three
+  mov rdi, fmt4
+  mov rsi, eleven
+  mov rdx, three
   mov ecx, [round_up]
   call apply_mxcsr
   ; division with precision error
   ; round up
-  mov rdi,fmt5
-  mov rsi,eleven
-  mov rdx,three
+  mov rdi, fmt5
+  mov rsi, eleven
+  mov rdx, three
   mov ecx, [round_down]
   call apply_mxcsr
   ; division with precision error
   ; truncate
-  mov rdi,fmt6
-  mov rsi,eleven
-  mov rdx,three
+  mov rdi, fmt6
+  mov rsi, eleven
+  mov rdx, three
   mov ecx, [truncate]
   call apply_mxcsr
   leave
@@ -115,7 +115,7 @@ main:
 ; function --------------------------------------------
 apply_mxcsr:
   push rbp
-  mov rbp,rsp
+  mov rbp, rsp
   push rsi
   push rdx
   push rcx
@@ -125,23 +125,23 @@ apply_mxcsr:
   pop rcx
   pop rdx
   pop rsi
-  mov [mxcsr_before],ecx
+  mov [mxcsr_before], ecx
   ldmxcsr [mxcsr_before]
   movsd xmm2, [rsi]       ; double precision float into xmm2
   divsd xmm2, [rdx]       ; divide xmm2
   stmxcsr [mxcsr_after]   ; save mxcsr to memory
-  movsd [xmm],xmm2        ; for use in print_xmm
-  mov rdi,f_div
+  movsd [xmm], xmm2       ; for use in print_xmm
+  mov rdi, f_div
   movsd xmm0, [rsi]
   movsd xmm1, [rdx]
   call printf
   call print_xmm
   ; print mxcsr
-  mov rdi,f_before
+  mov rdi, f_before
   call printf
   mov rdi, [mxcsr_before]
   call print_mxcsr
-  mov rdi,f_after
+  mov rdi, f_after
   call printf
   mov rdi, [mxcsr_after]
   call print_mxcsr
@@ -151,14 +151,14 @@ apply_mxcsr:
 ; function --------------------------------------------
 print_xmm:
   push rbp
-  mov rbp,rsp
+  mov rbp, rsp
   mov rdi, hex ; print 0x
   call printf
-  mov rcx,8
+  mov rcx, 8
 
 .loop:
-  xor rdi,rdi
-  mov dil,[xmm+rcx-1]
+  xor rdi, rdi
+  mov dil, [xmm+rcx-1]
   push rcx
   call print_hex
   pop rcx
